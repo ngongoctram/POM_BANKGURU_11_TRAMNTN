@@ -64,7 +64,7 @@ public class AbstractPages {
 		element.click();
 	}
 
-	public void sedkeyToElement(WebDriver driver, String locator, String value) {
+	public void senkeyToElement(WebDriver driver, String locator, String value) {
 		element = driver.findElement(By.xpath(locator));
 		element.clear();
 		element.sendKeys(value);

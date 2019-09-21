@@ -36,7 +36,7 @@ public class Level_02_Apply_Abstract_Page_1 {
 		currentURL = abstractPage.getCurrentUrl(driver);
 		abstractPage.clickToElement(driver, "//a[text()='here']");
 		abstractPage.waitToElementVisible(driver, "//input[@name='emailid']");
-		abstractPage.sedkeyToElement(driver, "//input[@name='emailid']", email);
+		abstractPage.senkeyToElement(driver, "//input[@name='emailid']", email);
 		abstractPage.clickToElement(driver, "//input[@type='submit']");
 		userID = abstractPage.getText(driver, "//td[text()='User ID :']/following-sibling::td");
 		password = abstractPage.getText(driver, "//td[text()='Password :']/following-sibling::td");
@@ -46,9 +46,10 @@ public class Level_02_Apply_Abstract_Page_1 {
 	@Test
 	public void TC_02_LoginToSystem() {
 		driver.get(currentURL);
-		abstractPage.sedkeyToElement(driver, "//input[@name ='uid']", userID);
-		abstractPage.sedkeyToElement(driver, "//input[@name ='password']", password);
+		abstractPage.senkeyToElement(driver, "//input[@name ='uid']", userID);
+		abstractPage.senkeyToElement(driver, "//input[@name ='password']", password);
 		abstractPage.clickToElement(driver, "//input[@name ='btnLogin']");
+		abstractPage.isElementDisplayed(driver, "//marquee[text()=\\\"Welcome To Manager's Page of Guru99 Bank\\");
 
 	}
 

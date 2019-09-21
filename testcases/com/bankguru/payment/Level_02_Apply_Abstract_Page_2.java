@@ -34,7 +34,7 @@ public class Level_02_Apply_Abstract_Page_2 extends AbstractPages {
 		currentURL = getCurrentUrl(driver);
 		clickToElement(driver, "//a[text()='here']");
 		waitToElementVisible(driver, "//input[@name='emailid']");
-		sedkeyToElement(driver, "//input[@name='emailid']", email);
+		senkeyToElement(driver, "//input[@name='emailid']", email);
 		clickToElement(driver, "//input[@type='submit']");
 		userID = getText(driver, "//td[text()='User ID :']/following-sibling::td");
 		password = getText(driver, "//td[text()='Password :']/following-sibling::td");
@@ -44,9 +44,10 @@ public class Level_02_Apply_Abstract_Page_2 extends AbstractPages {
 	@Test
 	public void TC_02_LoginToSystem() {
 		driver.get(currentURL);
-		sedkeyToElement(driver, "//input[@name ='uid']", userID);
-		sedkeyToElement(driver, "//input[@name ='password']", password);
+		senkeyToElement(driver, "//input[@name ='uid']", userID);
+		senkeyToElement(driver, "//input[@name ='password']", password);
 		clickToElement(driver, "//input[@name ='btnLogin']");
+		isElementDisplayed(driver, "//marquee[text()=\\\"Welcome To Manager's Page of Guru99 Bank\\");
 
 	}
 
