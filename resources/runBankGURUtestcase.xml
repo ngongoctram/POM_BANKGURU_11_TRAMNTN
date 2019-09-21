@@ -2,8 +2,7 @@
 <suite name="Bank Guru 99" parallel="false">
 	<test name="Run on FireFox browser">
 		<classes>
-		    <class name="com.bankguru.payment.Level_02_Apply_Abstract_Page_1" />
-			<class name="com.bankguru.payment.Level_02_Apply_Abstract_Page_2" />
+			<class name="com.bankguru.payment.Level_03_Page_Object_Pattern" />
 		</classes>
 	</test>
 </suite> 
