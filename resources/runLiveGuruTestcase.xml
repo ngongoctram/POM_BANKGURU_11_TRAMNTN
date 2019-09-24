@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Live Guru 99" parallel="false">
+	<test name="Run on FireFox browser">
+		<classes>
+			<class name="com.liveguru.login.Level_03_Page_Object_Pattern_II" />
+		</classes>
+	</test>
+</suite> 
