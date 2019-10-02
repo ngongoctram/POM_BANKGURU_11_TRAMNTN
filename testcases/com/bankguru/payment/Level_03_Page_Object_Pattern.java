@@ -29,10 +29,6 @@ public class Level_03_Page_Object_Pattern extends AbstractPages {
 	public void beforeClass() {
 		driver = new FirefoxDriver();
 
-		loginPage = new LoginPageObject(driver);
-		homePage = new HomePageObject(driver);
-		registerPage = new RegisterPageObject(driver);
-
 		explixitwait = new WebDriverWait(driver, 20);
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
@@ -44,8 +40,10 @@ public class Level_03_Page_Object_Pattern extends AbstractPages {
 
 	@Test
 	public void TC_01_RegisterToSystem() {
+		loginPage = new LoginPageObject(driver);
 		loginPageURL = loginPage.getLoginPageURL();
 		loginPage.clickToHereLink();
+		registerPage = new RegisterPageObject(driver);
 		registerPage.inputToEmailIDTextbox(email);
 		registerPage.clickSubmitButton();
 		userID = registerPage.getUserTextValue();
@@ -55,10 +53,12 @@ public class Level_03_Page_Object_Pattern extends AbstractPages {
 
 	@Test
 	public void TC_02_LoginToSystem() {
+		loginPage = new LoginPageObject(driver);
 		driver.get(loginPageURL);
 		loginPage.inputToUserIDTextbox(userID);
 		loginPage.inputToPasswordIDTextbox(password);
 		loginPage.clickLoginButton();
+		homePage = new HomePageObject(driver);
 		Assert.assertTrue(homePage.isWellComeMessageDisplayed());
 
 	}

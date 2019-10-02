@@ -29,8 +29,6 @@ public class Level_03_Page_Object_Pattern_II extends AbstractPages {
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 
-		loginPage = new LiveGuruLoginPageObject(driver);
-		dashboardPage = new LiveGuruDashboardPageObject(driver);
 
 		validEmail = "ngoctramtk94@gmail.com";
 		validPassword = "123456";
@@ -44,6 +42,7 @@ public class Level_03_Page_Object_Pattern_II extends AbstractPages {
 
 	@Test
 	public void TC_01_LoginWithEmptyEmail() {
+		loginPage = new LiveGuruLoginPageObject(driver);
 		loginPage.inputToEmailTextbox("");
 		loginPage.inputToPasswordTextbox(validPassword);
 		loginPage.clickOnLoginButton();
@@ -52,6 +51,7 @@ public class Level_03_Page_Object_Pattern_II extends AbstractPages {
 
 	@Test
 	public void TC_02_LoginWithEmptyPassword() {
+		loginPage = new LiveGuruLoginPageObject(driver);
 		loginPage.inputToEmailTextbox(validEmail);
 		loginPage.inputToPasswordTextbox("");
 		loginPage.clickOnLoginButton();
@@ -60,6 +60,7 @@ public class Level_03_Page_Object_Pattern_II extends AbstractPages {
 
 	@Test
 	public void TC_03_LoginWithInvalidEmail() {
+		loginPage = new LiveGuruLoginPageObject(driver);
 		loginPage.inputToEmailTextbox(invalidEmail);
 		loginPage.inputToPasswordTextbox(validPassword);
 		loginPage.clickOnLoginButton();
@@ -68,6 +69,7 @@ public class Level_03_Page_Object_Pattern_II extends AbstractPages {
 
 	@Test
 	public void TC_04_LoginWithPasswordLessThan6Chars() {
+		loginPage = new LiveGuruLoginPageObject(driver);
 		loginPage.inputToEmailTextbox(validEmail);
 		loginPage.inputToPasswordTextbox(invalidPassword);
 		loginPage.clickOnLoginButton();
@@ -76,6 +78,7 @@ public class Level_03_Page_Object_Pattern_II extends AbstractPages {
 
 	@Test
 	public void TC_05_LoginWithIncorrectPassword() {
+		loginPage = new LiveGuruLoginPageObject(driver);
 		loginPage.inputToEmailTextbox(validEmail);
 		loginPage.inputToPasswordTextbox(incorrectPassword);
 		loginPage.clickOnLoginButton();
@@ -84,9 +87,11 @@ public class Level_03_Page_Object_Pattern_II extends AbstractPages {
 
 	@Test
 	public void TC_06_LoginWithValidEmailAndPassword() {
+		loginPage = new LiveGuruLoginPageObject(driver);
 		loginPage.inputToEmailTextbox(validEmail);
 		loginPage.inputToPasswordTextbox(validPassword);
 		loginPage.clickOnLoginButton();
+		dashboardPage = new LiveGuruDashboardPageObject(driver);
 		Assert.assertTrue(dashboardPage.isDisplayedLoginSuccessInDashboard());
 	}
 
