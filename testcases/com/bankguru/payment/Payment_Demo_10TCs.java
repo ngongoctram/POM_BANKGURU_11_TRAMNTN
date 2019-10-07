@@ -167,8 +167,12 @@ public class Payment_Demo_10TCs extends AbstractPages {
 
 		customerUpdatedPage = new CustomerUpdateMsgPageObject(driver);
 		Assert.assertTrue(customerUpdatedPage.isDisplayedCustomerUpdateMsg());
+		customerUpdatedPage.clickToContinueLink()
 
 	}
+
+	@Test
+	public void TC_05_EditCustomer_1()
 
 	public int randomEmail() {
 		Random random = new Random();

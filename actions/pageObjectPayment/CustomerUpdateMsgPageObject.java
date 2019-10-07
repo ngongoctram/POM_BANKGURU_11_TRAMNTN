@@ -18,4 +18,9 @@ public class CustomerUpdateMsgPageObject extends AbstractPages {
 
 	}
 
+	public void clickToContinueLink() {
+		waitToElementVisible(driver, CustomerUpdateMsgPageUI.CONTINUE_LINKTEXT);
+		clickToElement(driver, CustomerUpdateMsgPageUI.CONTINUE_LINKTEXT);
+	}
+
 }
