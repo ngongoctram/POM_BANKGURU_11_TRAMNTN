@@ -18,4 +18,16 @@ public class HomePageObject extends AbstractPages {
 
 	}
 
+	public void clickToNewCustomerLink() {
+		waitToElementVisible(driverGlobal, HomePageUI.NEW_CUSTOMER_LINKTEXT);
+		clickToElement(driverGlobal, HomePageUI.NEW_CUSTOMER_LINKTEXT);
+
+	}
+
+	public void clickToEditCustomer() {
+		waitToElementVisible(driverGlobal, HomePageUI.EDIT_CUSTOMER_LINKTEXT);
+		clickToElement(driverGlobal, HomePageUI.EDIT_CUSTOMER_LINKTEXT);
+
+	}
+
 }
