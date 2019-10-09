@@ -13,6 +13,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageObjects.DeleteAccountPageObject;
+import pageObjects.EditCustomerPageObject;
+import pageObjects.HomePageObject;
+import pageObjects.NewCustomerPageObject;
+import pageUIs.AbstractPageUI;
+
 public class AbstractPages {
 	public void openAnyURL(WebDriver driver, String urlvalue) {
 		driver.get(urlvalue);
@@ -277,6 +283,30 @@ public class AbstractPages {
 		waitExplicit = new WebDriverWait(driver, longTimeOut);
 		waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(by));
 
+	}
+
+	public NewCustomerPageObject openNewCustomerPage(WebDriver driver) {
+		waitToElementVisible(driver, AbstractPageUI.NEW_CUSTOMER_LINK);
+		clickToElement(driver, AbstractPageUI.NEW_CUSTOMER_LINK);
+		return PageGeneratorManager.newCustomerPage(driver);
+	}
+
+	public EditCustomerPageObject openEditCustomerPage(WebDriver driver) {
+		waitToElementVisible(driver, AbstractPageUI.EDIT_CUSTOMER_LINK);
+		clickToElement(driver, AbstractPageUI.EDIT_CUSTOMER_LINK);
+		return PageGeneratorManager.editCustomerPage(driver);
+	}
+
+	public DeleteAccountPageObject openDeleteAcountPage(WebDriver driver) {
+		waitToElementVisible(driver, AbstractPageUI.DELETE_ACCOUNT_LINK);
+		clickToElement(driver, AbstractPageUI.DELETE_ACCOUNT_LINK);
+		return PageGeneratorManager.deleteAccountPage(driver);
+	}
+
+	public HomePageObject openHomePage(WebDriver driver) {
+		waitToElementVisible(driver, AbstractPageUI.HOMEPAGE_LINK);
+		clickToElement(driver, AbstractPageUI.HOMEPAGE_LINK);
+		return PageGeneratorManager.homePage1(driver);
 	}
 
 	By by;

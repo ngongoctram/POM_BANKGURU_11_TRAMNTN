@@ -11,7 +11,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.AbstractTest;
-import commons.PageFactoryManager;
+import commons.PageGeneratorManager;
 import pageObjects.HomePageFactory;
 import pageObjects.LoginPageFactory;
 import pageObjects.RegisterPageFactory;
@@ -36,7 +36,7 @@ public class Level_06_MultipleBrowers_Parallel_Factorypattern extends AbstractTe
 		driver.get("http://demo.guru99.com/V4/index.php");
 
 		email = "auto_test_" + randomEmail() + "@gmail.com";
-		loginPage = PageFactoryManager.loginPage(driver);
+		loginPage = PageGeneratorManager.loginPage(driver);
 
 	}
 

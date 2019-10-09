@@ -6,27 +6,27 @@ import commons.AbstractPages;
 import pageUIs.HomePageUI;
 
 public class HomePageObject extends AbstractPages {
-	private WebDriver driverGlobal;
+	private WebDriver driver;
 
-	public HomePageObject(WebDriver driverLocal) {
-		driverGlobal = driverLocal;
+	public HomePageObject(WebDriver driver) {
+		this.driver = driver;
 	}
 
 	public boolean isWellComeMessageDisplayed() {
-		waitToElementVisible(driverGlobal, HomePageUI.WELLCOME_MSG);
-		return isElementDisplayed(driverGlobal, HomePageUI.WELLCOME_MSG);
+		waitToElementVisible(driver, HomePageUI.WELLCOME_MSG);
+		return isElementDisplayed(driver, HomePageUI.WELLCOME_MSG);
 
 	}
 
 	public void clickToNewCustomerLink() {
-		waitToElementVisible(driverGlobal, HomePageUI.NEW_CUSTOMER_LINKTEXT);
-		clickToElement(driverGlobal, HomePageUI.NEW_CUSTOMER_LINKTEXT);
+		waitToElementVisible(driver, HomePageUI.NEW_CUSTOMER_LINKTEXT);
+		clickToElement(driver, HomePageUI.NEW_CUSTOMER_LINKTEXT);
 
 	}
 
 	public void clickToEditCustomer() {
-		waitToElementVisible(driverGlobal, HomePageUI.EDIT_CUSTOMER_LINKTEXT);
-		clickToElement(driverGlobal, HomePageUI.EDIT_CUSTOMER_LINKTEXT);
+		waitToElementVisible(driver, HomePageUI.EDIT_CUSTOMER_LINKTEXT);
+		clickToElement(driver, HomePageUI.EDIT_CUSTOMER_LINKTEXT);
 
 	}
 

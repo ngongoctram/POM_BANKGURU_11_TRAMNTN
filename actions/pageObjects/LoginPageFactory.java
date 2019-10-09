@@ -7,7 +7,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 import commons.AbstractPageFactory;
-import commons.PageFactoryManager;
+import commons.PageGeneratorManager;
 
 public class LoginPageFactory extends AbstractPageFactory {
 	WebDriver driver;
@@ -36,7 +36,7 @@ public class LoginPageFactory extends AbstractPageFactory {
 	public RegisterPageFactory clickToHereLink() {
 		waitToElementVisible(driver, hereLink);
 		clickToElement(driver, hereLink);
-		return PageFactoryManager.registerPage(driver);
+		return PageGeneratorManager.registerPage(driver);
 
 	}
 
@@ -55,7 +55,7 @@ public class LoginPageFactory extends AbstractPageFactory {
 	public HomePageFactory clickLoginButton() {
 		waitToElementVisible(driver, LoginButton);
 		clickToElement(driver, LoginButton);
-		return PageFactoryManager.homePage(driver);
+		return PageGeneratorManager.homePage(driver);
 	}
 
 }
