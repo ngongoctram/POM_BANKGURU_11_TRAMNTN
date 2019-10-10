@@ -5,12 +5,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import commons.AbstractTest;
+import commons.AbstractPages;
 import commons.DriverManager;
 import commons.DriverManagerFactory;
 import commons.PageGeneratorManager;
@@ -18,7 +19,7 @@ import pageObjects.HomePageFactory;
 import pageObjects.LoginPageFactory;
 import pageObjects.RegisterPageFactory;
 
-public class Level_07_FactorypatternAdvanced extends AbstractTest {
+public class Level_07_FactorypatternAdvanced extends AbstractPages {
 	WebDriver driver;
 	WebDriverWait explixitwait;
 	String email, currentURL, userID, password;
@@ -46,23 +47,23 @@ public class Level_07_FactorypatternAdvanced extends AbstractTest {
 
 	@Test
 	public void TC_01_RegisterToSystem() {
-//		openURL(driver, "http://demo.guru99.com/V4/index.php");
-//		currentURL = loginPage.getCurrentURL(driver);
-//		registerPage = loginPage.clickToHereLink();
-//		registerPage.inputToEmailIDTextbox(email);
-//		registerPage.clickSubmitButton();
-//		userID = registerPage.getUserTextValue();
-//		password = registerPage.getPasswordTextValue();
+		openAnyURL(driver, "http://demo.guru99.com/V4/index.php");
+		currentURL = loginPage.getCurrentURL(driver);
+		registerPage = loginPage.clickToHereLink();
+		registerPage.inputToEmailIDTextbox(email);
+		registerPage.clickSubmitButton();
+		userID = registerPage.getUserTextValue();
+		password = registerPage.getPasswordTextValue();
 
 	}
 
 	@Test
 	public void TC_02_LoginToSystem() {
-//		loginPage = registerPage.OpenURL(currentURL);
-//		loginPage.inputToUserIDTextbox(userID);
-//		loginPage.inputToPasswordIDTextbox(password);
-//		homePage = loginPage.clickLoginButton();
-//		Assert.assertTrue(homePage.isWellComeMessageDisplayed());
+		loginPage = registerPage.OpenURL(currentURL);
+		loginPage.inputToUserIDTextbox(userID);
+		loginPage.inputToPasswordIDTextbox(password);
+		homePage = loginPage.clickLoginButton();
+		Assert.assertTrue(homePage.isWellComeMessageDisplayed());
 
 	}
 
