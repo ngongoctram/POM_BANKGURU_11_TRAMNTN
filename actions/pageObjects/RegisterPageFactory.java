@@ -7,7 +7,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 import commons.AbstractPageFactory;
-import commons.PageFactoryManager;
+import commons.PageGeneratorManager;
 
 public class RegisterPageFactory extends AbstractPageFactory {
 	WebDriver driver;
@@ -31,7 +31,7 @@ public class RegisterPageFactory extends AbstractPageFactory {
 
 	public LoginPageFactory OpenURL(String url) {
 		openURL(driver, url);
-		return PageFactoryManager.loginPage(driver);
+		return PageGeneratorManager.loginPage(driver);
 	}
 
 	public void inputToEmailIDTextbox(String EmailValue) {

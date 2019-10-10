@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import commons.AbstractPageFactory;
-import commons.PageFactoryManager;
+import commons.PageGeneratorManager;
 import pageObjects.HomePageFactory;
 import pageObjects.LoginPageFactory;
 import pageObjects.RegisterPageFactory;
@@ -33,7 +33,7 @@ public class Level_04_Page_Factory extends AbstractPageFactory {
 		driver.manage().window().maximize();
 
 		email = "auto_test_" + randomEmail() + "@gmail.com";
-		loginPage = PageFactoryManager.loginPage(driver);
+		loginPage = PageGeneratorManager.loginPage(driver);
 
 	}
 
