@@ -77,7 +77,7 @@ public class AbstractPages {
 	}
 
 	public void selectItemInDropdown(WebDriver driver, String locator, String valueItem) {
-		select = new Select(driver.findElement(By.linkText(locator)));
+		select = new Select(driver.findElement(By.xpath(locator)));
 		select.selectByVisibleText(valueItem);
 	}
 

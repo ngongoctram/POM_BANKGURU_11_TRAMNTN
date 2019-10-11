@@ -30,4 +30,10 @@ public class HomePageObject extends AbstractPages {
 
 	}
 
+	public void clickToAddnewAccount() {
+		waitToElementVisible(driver, HomePageUI.NEW_ACCOUNT_LINKTEXT);
+		clickToElement(driver, HomePageUI.NEW_ACCOUNT_LINKTEXT);
+
+	}
+
 }

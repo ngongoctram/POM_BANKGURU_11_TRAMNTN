@@ -42,6 +42,7 @@ public class Payment_Demo_10TCs extends AbstractPages {
 	String email, loginPageURL, userID, password;
 	String customerID_1, customerName, dateOfBirth, address, city, state, pin, mobile, customerEmail, pass;
 	String customerID_2, addressEdit, cityEdit, stateEdit, pinEdit;
+	String deposit;
 
 	private LoginPageObject loginPage;
 	private HomePageObject homePage;
@@ -89,6 +90,8 @@ public class Payment_Demo_10TCs extends AbstractPages {
 		cityEdit = "Boulder";
 		stateEdit = "Colorado";
 		pinEdit = "235647";
+
+		deposit = "50000";
 
 		email = "auto_test_" + randomEmail() + "@gmail.com";
 		openAnyURL(driver, "http://demo.guru99.com/V4/index.php");
@@ -172,7 +175,18 @@ public class Payment_Demo_10TCs extends AbstractPages {
 	}
 
 	@Test
-	public void TC_05_EditCustomer_1() {
+	public void TC_05_AddNewAccount() {
+
+		homePage = new HomePageObject(driver);
+		homePage.clickToAddnewAccount();
+		addAccountPage = new AddAccountPageObject(driver);
+		addAccountPage.inputCustomerID(customerID_1);
+		addAccountPage.selectAccountType("Savings");
+		addAccountPage.inputDeposit(deposit);
+		addAccountPage.clickSubmitButton();
+		accountCreatedPage = new AccCreateMsgPageObject(driver);
+		Assert.assertTrue(accountCreatedPage.isDisplayedMsgSuccess());
+		Assert.assertEquals(accountCreatedPage.getTextDeposit(), deposit);
 
 	}
 
