@@ -15,5 +15,6 @@ public class AbstractPageUI {
 	public static final String BALANCE_ENQUIRY = "//a[text()='Balance Enquiry']";
 	public static final String MINI_STATEMENT_LINK = "//a[text()='Mini Statement']";
 	public static final String CUSTOMISED_STATEMENT_LINK = "//a[text()='Customised Statement']";
+	public static final String DYNAMIC_PAGE_XPATH = "//a[text()='%s']";
 
 }

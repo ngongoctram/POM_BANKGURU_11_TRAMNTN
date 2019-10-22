@@ -2,6 +2,7 @@ package commons;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -70,6 +71,12 @@ public class AbstractPages {
 		element.click();
 	}
 
+	public void clickToElementForDynamicLocator(WebDriver driver, String locator, String... values) {
+		locator = String.format(locator, (Object[]) values);
+		element = driver.findElement(By.xpath(locator));
+		element.click();
+	}
+
 	public void senkeyToElement(WebDriver driver, String locator, String value) {
 		element = driver.findElement(By.xpath(locator));
 		element.clear();
@@ -122,9 +129,17 @@ public class AbstractPages {
 	}
 
 	public boolean isElementDisplayed(WebDriver driver, String locator) {
-		element = driver.findElement(By.xpath(locator));
-		return element.isDisplayed();
-
+		setOverideTimeout(driver, Constrants.SHORT_TIMEOUT);
+		try {
+			WebElement element = driver.findElement(By.xpath(locator));
+			setOverideTimeout(driver, Constrants.LONG_TIMEOUT);
+			boolean status = element.isDisplayed();
+			return status;
+		} catch (Exception ex) {
+			setOverideTimeout(driver, Constrants.LONG_TIMEOUT);
+			System.out.println(ex.getMessage());
+			return false;
+		}
 	}
 
 	public boolean isElementSelected(WebDriver driver, String locator) {
@@ -285,6 +300,29 @@ public class AbstractPages {
 
 	}
 
+	public void waitToElementInvisible(WebDriver driver, String locator) {
+		waitExplicit = new WebDriverWait(driver, Constrants.SHORT_TIMEOUT);
+		try {
+			by = By.xpath(locator);
+			waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(by));
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+
+	}
+
+	public void setOverideTimeout(WebDriver driver, long timeSecond) {
+		driver.manage().timeouts().implicitlyWait(timeSecond, TimeUnit.SECONDS);
+	}
+
+	public void waitToElementVisibleForDynamicLocator(WebDriver driver, String locator, String... values) {
+		locator = String.format(locator, (Object[]) values);
+		by = By.xpath(locator);
+		waitExplicit = new WebDriverWait(driver, longTimeOut);
+		waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(by));
+
+	}
+
 	public NewCustomerPageObject openNewCustomerPage(WebDriver driver) {
 		waitToElementVisible(driver, AbstractPageUI.NEW_CUSTOMER_LINK);
 		clickToElement(driver, AbstractPageUI.NEW_CUSTOMER_LINK);
@@ -307,6 +345,27 @@ public class AbstractPages {
 		waitToElementVisible(driver, AbstractPageUI.HOMEPAGE_LINK);
 		clickToElement(driver, AbstractPageUI.HOMEPAGE_LINK);
 		return PageGeneratorManager.homePage1(driver);
+	}
+
+	public AbstractPages OpenDynamicPage(WebDriver driver, String pageName) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_PAGE_XPATH, pageName);
+		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_PAGE_XPATH, pageName);
+
+		switch (pageName) {
+		case "Edit Customer":
+			return PageGeneratorManager.editCustomerPage(driver);
+		case "Delete Account":
+			return PageGeneratorManager.deleteAccountPage(driver);
+		case "New Customer":
+			return PageGeneratorManager.newCustomerPage(driver);
+		default:
+			return PageGeneratorManager.homePage1(driver);
+		}
+	}
+
+	public void OpenPageByDynamicLocator(WebDriver driver, String pageName) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_PAGE_XPATH, pageName);
+		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_PAGE_XPATH, pageName);
 	}
 
 	By by;

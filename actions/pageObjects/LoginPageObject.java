@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import commons.AbstractPages;
 import pageUIs.LoginPageUI;
+import pageUIs.RegisterPageUI;
 
 public class LoginPageObject extends AbstractPages {
 	private WebDriver driverGlobal;
@@ -38,6 +39,16 @@ public class LoginPageObject extends AbstractPages {
 		waitToElementVisible(driverGlobal, LoginPageUI.LOGIN_BUTTON);
 		clickToElement(driverGlobal, LoginPageUI.LOGIN_BUTTON);
 
+	}
+
+	public boolean isEmailIDTextboxatRegisterPageUndisplayed() {
+		waitToElementInvisible(driverGlobal, RegisterPageUI.EMAIL_ID_TEXTBOX);
+		return isElementDisplayed(driverGlobal, RegisterPageUI.EMAIL_ID_TEXTBOX);
+	}
+
+	public boolean isFileUploadLinkUndisplayed() {
+		waitToElementInvisible(driverGlobal, LoginPageUI.FILE_UPLOAD_LINK_IN_NARBAR);
+		return isElementDisplayed(driverGlobal, LoginPageUI.FILE_UPLOAD_LINK_IN_NARBAR);
 	}
 
 }
