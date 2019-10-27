@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import commons.AbstractPages;
+import commons.PageGeneratorManagerForPayment;
 import pageObjectPayment.AccCreateMsgPageObject;
 import pageObjectPayment.AccountUpdateMsgPageObject;
 import pageObjectPayment.AddAccountPageObject;
@@ -95,15 +96,15 @@ public class Payment_Demo_10TCs extends AbstractPages {
 
 		email = "auto_test_" + randomEmail() + "@gmail.com";
 		openAnyURL(driver, "http://demo.guru99.com/V4/index.php");
+		loginPage = PageGeneratorManagerForPayment.getLoginPage(driver);
 
 	}
 
 	@Test
 	public void TC_01_RegisterToSystem() {
-		loginPage = new LoginPageObject(driver);
 		loginPageURL = loginPage.getLoginPageURL();
 		loginPage.clickToHereLink();
-		registerPage = new RegisterPageObject(driver);
+		registerPage = PageGeneratorManagerForPayment.getRegisterPage(driver);
 		registerPage.inputToEmailIDTextbox(email);
 		registerPage.clickSubmitButton();
 		userID = registerPage.getUserTextValue();
@@ -113,21 +114,20 @@ public class Payment_Demo_10TCs extends AbstractPages {
 
 	@Test
 	public void TC_02_LoginToSystem() {
-		loginPage = new LoginPageObject(driver);
 		driver.get(loginPageURL);
 		loginPage.inputToUserIDTextbox(userID);
 		loginPage.inputToPasswordIDTextbox(password);
 		loginPage.clickLoginButton();
-		homePage = new HomePageObject(driver);
+		loginPage.OpenPageByDynamicLocator(driver, "Manager");
+		homePage = PageGeneratorManagerForPayment.getHomePage(driver);
 		Assert.assertTrue(homePage.isWellComeMessageDisplayed());
 
 	}
 
 	@Test
 	public void TC_03_AddNewCustomer_1() {
-		homePage = new HomePageObject(driver);
-		homePage.clickToNewCustomerLink();
-		addCustomerPage = new AddCustomerPageObject(driver);
+		homePage.OpenPageByDynamicLocator(driver, "New Customer");
+		addCustomerPage = PageGeneratorManagerForPayment.getAddCustomerPage(driver);
 		addCustomerPage.inputCustomerName(customerName);
 		addCustomerPage.inputDateOfBirth(dateOfBirth);
 		addCustomerPage.inputAddress(address);
@@ -138,7 +138,7 @@ public class Payment_Demo_10TCs extends AbstractPages {
 		addCustomerPage.inputEmail(customerEmail);
 		addCustomerPage.inputPassword(pass);
 		addCustomerPage.clickToSubmitButton();
-		customerCreatedPage = new CustomerRegMsgPageObject(driver);
+		customerCreatedPage = PageGeneratorManagerForPayment.getCustomerRegMsgPage(driver);
 		customerID_1 = customerCreatedPage.getCustomerID();
 		Assert.assertTrue(customerCreatedPage.isDisplayedMsgCreateCustomer());
 		Assert.assertEquals(customerCreatedPage.getTextCustomerName(), customerName);
@@ -154,21 +154,18 @@ public class Payment_Demo_10TCs extends AbstractPages {
 
 	@Test
 	public void TC_04_EditCustomer_1() {
-		customerCreatedPage = new CustomerRegMsgPageObject(driver);
-		customerCreatedPage.clickToContinueLink();
-		homePage = new HomePageObject(driver);
-		homePage.clickToEditCustomer();
-		editCustomerPage = new EditCustomerInputPageObject(driver);
+		customerCreatedPage.OpenPageByDynamicLocator(driver, "Edit Customer");
+		editCustomerPage = PageGeneratorManagerForPayment.getEditCustomerInputPage(driver);
 		editCustomerPage.inputCustomerID(customerID_1);
 		editCustomerPage.clickToSubmitButton();
-		customerEditedPage = new EditCustomerPageObject(driver);
-		customerEditedPage.inputAddressEditValue(addressEdit);
+
+		customerEditedPage = PageGeneratorManagerForPayment.getEditCustomerPage(driver);
 		customerEditedPage.inputCityValue(cityEdit);
 		customerEditedPage.inputStateValue(stateEdit);
 		customerEditedPage.inputPinvalue(pinEdit);
 		customerEditedPage.clickToSubmitButton();
 
-		customerUpdatedPage = new CustomerUpdateMsgPageObject(driver);
+		customerUpdatedPage = PageGeneratorManagerForPayment.getCustomerUpdateMsgPage(driver);
 		Assert.assertTrue(customerUpdatedPage.isDisplayedCustomerUpdateMsg());
 		customerUpdatedPage.clickToContinueLink();
 
@@ -176,17 +173,20 @@ public class Payment_Demo_10TCs extends AbstractPages {
 
 	@Test
 	public void TC_05_AddNewAccount() {
-
-		homePage = new HomePageObject(driver);
-		homePage.clickToAddnewAccount();
-		addAccountPage = new AddAccountPageObject(driver);
+		customerUpdatedPage.OpenPageByDynamicLocator(driver, "New Account");
+		addAccountPage = PageGeneratorManagerForPayment.getAddAccountPage(driver);
 		addAccountPage.inputCustomerID(customerID_1);
 		addAccountPage.selectAccountType("Savings");
 		addAccountPage.inputDeposit(deposit);
 		addAccountPage.clickSubmitButton();
-		accountCreatedPage = new AccCreateMsgPageObject(driver);
+		accountCreatedPage = PageGeneratorManagerForPayment.getAccCreateMsgPage(driver);
 		Assert.assertTrue(accountCreatedPage.isDisplayedMsgSuccess());
 		Assert.assertEquals(accountCreatedPage.getTextDeposit(), deposit);
+
+	}
+
+	@Test
+	public void TC_06_EditAccount() {
 
 	}
 

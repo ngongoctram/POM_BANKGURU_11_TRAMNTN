@@ -8,6 +8,11 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry excluding="testcases/|testdata/|actions/|interfaces/|resources/|src/" kind="src" path=""/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="libraries/selenium-server-standalone-2.53.1.jar"/>
+	<classpathentry kind="lib" path="libraries/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="libraries/velocity-dep-1.5.jar"/>
+	<classpathentry kind="lib" path="libraries/guice-4.1.0.jar"/>
+	<classpathentry kind="lib" path="libraries/reportng-1.1.4.jar"/>
+	<classpathentry kind="lib" path="libraries/webdrivermanager-3.6.0.jar"/>
+	<classpathentry kind="lib" path="libraries/selenium-server-standalone-2.53.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

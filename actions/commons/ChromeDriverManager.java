@@ -9,6 +9,7 @@ public class ChromeDriverManager extends DriverManager {
 	protected void createDriver() {
 		String projectFolder = System.getProperty("user.dir");
 		System.setProperty("webdriver.chrome.driver", projectFolder + ".\\resources\\chromedriver.exe");
+//		WebDriverManager.chromedriver().setup();
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--incognito");
