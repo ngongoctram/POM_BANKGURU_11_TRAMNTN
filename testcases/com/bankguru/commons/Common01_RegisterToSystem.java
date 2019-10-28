@@ -44,8 +44,8 @@ public class Common01_RegisterToSystem extends AbstractTest {
 	}
 
 	@AfterTest
-	public void cleanData() {
-		driver.quit();
+	public void afterClass() {
+		closeBrowserAndDriver(driver);
 	}
 
 }

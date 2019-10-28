@@ -1,8 +1,8 @@
-2019-10-27 23:25:59,652 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report - TC_00 Login - Step 01 : Verify Email textbox is not displayed at Login page
-2019-10-27 23:26:20,324 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report -  -------------------------- FAILED -------------------------- 
-2019-10-27 23:26:20,390 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report - TC_00 Login - Step 02 : Verify File Upload Link is not displayed
-2019-10-27 23:26:25,573 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report -  -------------------------- PASSED -------------------------- 
-2019-10-27 23:26:25,573 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report - TC_00 Login - Step 03 : Input data Email and Password
-2019-10-27 23:26:53,581 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report -  -------------------------- PASSED -------------------------- 
-2019-10-27 23:26:53,641 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report - OS name = windows 10
-2019-10-27 23:26:55,286 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report - ---------- QUIT BROWSER SUCCESS ----------
+2019-10-28 14:52:27,230 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report - TC_00 Login - Step 01 : Verify Email textbox is not displayed at Login page
+2019-10-28 14:52:47,373 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report -  -------------------------- PASSED -------------------------- 
+2019-10-28 14:52:47,379 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report - TC_00 Login - Step 02 : Verify File Upload Link is not displayed
+2019-10-28 14:52:52,752 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report -  -------------------------- PASSED -------------------------- 
+2019-10-28 14:52:52,752 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report - TC_00 Login - Step 03 : Input data Email and Password
+2019-10-28 14:52:56,901 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report -  -------------------------- PASSED -------------------------- 
+2019-10-28 14:52:56,903 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report - OS name = windows 10
+2019-10-28 14:52:58,000 INFO  com.bankguru.payment.Level_11_Assert_Verify_Log_Report - ---------- QUIT BROWSER SUCCESS ----------

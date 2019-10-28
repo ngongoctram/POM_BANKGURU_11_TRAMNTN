@@ -14,5 +14,12 @@
 	<classpathentry kind="lib" path="libraries/reportng-1.1.4.jar"/>
 	<classpathentry kind="lib" path="libraries/webdrivermanager-3.6.0.jar"/>
 	<classpathentry kind="lib" path="libraries/selenium-server-standalone-2.53.1.jar"/>
+	<classpathentry kind="lib" path="libraries/gson-2.8.5.jar"/>
+	<classpathentry kind="lib" path="libraries/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="libraries/commons-lang3-3.8.1.jar"/>
+	<classpathentry kind="lib" path="libraries/httpclient-4.5.9.jar"/>
+	<classpathentry kind="lib" path="libraries/jsoup-1.11.3.jar"/>
+	<classpathentry kind="lib" path="libraries/jarchivelib-1.0.0.jar"/>
+	<classpathentry kind="lib" path="libraries/slf4j-api-1.7.24.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

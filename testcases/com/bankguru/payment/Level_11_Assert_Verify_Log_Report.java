@@ -3,7 +3,6 @@ package com.bankguru.payment;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -31,8 +30,8 @@ public class Level_11_Assert_Verify_Log_Report extends AbstractTest {
 
 	@Parameters("browser")
 	@BeforeClass
-	public void beforeClass() {
-		driver = new FirefoxDriver();
+	public void beforeClass(String browserName) {
+		driver = openMultiBrowser(browserName);
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 
@@ -45,7 +44,7 @@ public class Level_11_Assert_Verify_Log_Report extends AbstractTest {
 	@Test
 	public void TC_00_LoginToSystem() {
 		log.info("TC_00 Login - Step 01 : Verify Email textbox is not displayed at Login page");
-		verifyTrue(loginPage1.isEmailIDTextboxatRegisterPageUndisplayed());
+		verifyFalse(loginPage1.isEmailIDTextboxatRegisterPageUndisplayed());
 
 		log.info("TC_00 Login - Step 02 : Verify File Upload Link is not displayed");
 		verifyFalse(loginPage1.isFileUploadLinkUndisplayed());

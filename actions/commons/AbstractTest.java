@@ -11,6 +11,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class AbstractTest {
 	WebDriver driver;
 
@@ -28,7 +30,8 @@ public class AbstractTest {
 		if (browserName.equals("firefox")) {
 			driver = new FirefoxDriver();
 		} else if (browserName.equals("chrome")) {
-			System.setProperty("webdriver.chrome.driver", projectFolder + ".\\resources\\chromedriver.exe");
+//			System.setProperty("webdriver.chrome.driver", projectFolder + ".\\resources\\chromedriver.exe");
+			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 		} else if (browserName.equals("headless")) {
 			ChromeOptions options = new ChromeOptions();
