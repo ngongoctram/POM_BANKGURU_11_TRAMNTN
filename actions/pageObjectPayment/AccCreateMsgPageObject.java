@@ -24,4 +24,9 @@ public class AccCreateMsgPageObject extends AbstractPages {
 
 	}
 
+	public String getAccountIDNO() {
+		waitToElementVisible(driver, AccCreateMsgPageUI.ACCOUNT_ID_TEXT);
+		return getText(driver, AccCreateMsgPageUI.ACCOUNT_ID_TEXT);
+	}
+
 }

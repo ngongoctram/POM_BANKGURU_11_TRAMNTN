@@ -43,7 +43,8 @@ public class Payment_Demo_10TCs extends AbstractPages {
 	String email, loginPageURL, userID, password;
 	String customerID_1, customerName, dateOfBirth, address, city, state, pin, mobile, customerEmail, pass;
 	String customerID_2, addressEdit, cityEdit, stateEdit, pinEdit;
-	String deposit;
+	String accountID;
+	int deposit, amount;
 
 	private LoginPageObject loginPage;
 	private HomePageObject homePage;
@@ -92,7 +93,8 @@ public class Payment_Demo_10TCs extends AbstractPages {
 		stateEdit = "Colorado";
 		pinEdit = "235647";
 
-		deposit = "50000";
+		deposit = 50000;
+		amount = 5000;
 
 		email = "auto_test_" + randomEmail() + "@gmail.com";
 		openAnyURL(driver, "http://demo.guru99.com/V4/index.php");
@@ -182,11 +184,22 @@ public class Payment_Demo_10TCs extends AbstractPages {
 		accountCreatedPage = PageGeneratorManagerForPayment.getAccCreateMsgPage(driver);
 		Assert.assertTrue(accountCreatedPage.isDisplayedMsgSuccess());
 		Assert.assertEquals(accountCreatedPage.getTextDeposit(), deposit);
+		accountID = accountCreatedPage.getAccountIDNO();
 
 	}
 
 	@Test
 	public void TC_06_EditAccount() {
+		accountCreatedPage.OpenPageByDynamicLocator(driver, "Edit Account");
+		editAccountPage = PageGeneratorManagerForPayment.getEditAccountInputPage(driver);
+		editAccountPage.inputToAccountNo(accountID);
+		editAccountPage.clickToSubmitButton();
+		accountEditedPage = PageGeneratorManagerForPayment.getEditAccountPage(driver);
+		accountEditedPage.EditAccountType("Current");
+		accountEditedPage.clickSubmitBtn();
+		accountUpdatedPage = PageGeneratorManagerForPayment.getAccountUpdateMsgPage(driver);
+		Assert.assertTrue(accountUpdatedPage.isDisplayedMsgSuccess());
+		Assert.assertEquals(accountUpdatedPage.getTextAccountType(), "Current");
 
 	}
 

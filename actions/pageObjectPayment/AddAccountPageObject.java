@@ -23,7 +23,7 @@ public class AddAccountPageObject extends AbstractPages {
 		selectItemInDropdown(driver, AddAccountPageUI.ACCOUNT_TYPE_DRL, accountType);
 	}
 
-	public void inputDeposit(String depositValue) {
+	public void inputDeposit(int depositValue) {
 		waitToElementVisible(driver, AddAccountPageUI.INITIAL_DEPOSIT_TXT);
 		senkeyToElement(driver, AddAccountPageUI.INITIAL_DEPOSIT_TXT, depositValue);
 
