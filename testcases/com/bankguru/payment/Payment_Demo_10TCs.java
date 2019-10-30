@@ -203,6 +203,17 @@ public class Payment_Demo_10TCs extends AbstractPages {
 
 	}
 
+	@Test
+	public void TC_06_Deposit() {
+		accountUpdatedPage.OpenPageByDynamicLocator(driver, "Deposit");
+		depositInputPage = PageGeneratorManagerForPayment.getDepositInputPage(driver);
+		depositInputPage.inputAccountNo(accountID);
+		depositInputPage.inputAmountValue(amount);
+		depositInputPage.inputDescription("deposit");
+		depositInputPage.clickToSubmitBtn();
+
+	}
+
 	public int randomEmail() {
 		Random random = new Random();
 		return random.nextInt(999999);

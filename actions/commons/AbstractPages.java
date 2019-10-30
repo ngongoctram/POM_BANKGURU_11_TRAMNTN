@@ -83,6 +83,18 @@ public class AbstractPages {
 		element.sendKeys(value);
 	}
 
+//	public void sendKeysINTByJS(WebDriver driver, String locator, int attributeValue){
+//	    JavascriptExecutor js = ((JavascriptExecutor) driver);
+//	    boolean netQtty=false;
+//	    js.executeScript("arguments[0].setAttribute('value','"+attributeValue+"');", netQtty);
+//	}
+
+	public void sendkeyToElementConvertToString(WebDriver driver, String locator, int value) {
+		element = driver.findElement(By.xpath(locator));
+		element.clear();
+		element.sendKeys(String.valueOf(value));
+	}
+
 	public void selectItemInDropdown(WebDriver driver, String locator, String valueItem) {
 		select = new Select(driver.findElement(By.xpath(locator)));
 		select.selectByVisibleText(valueItem);

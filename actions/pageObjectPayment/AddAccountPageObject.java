@@ -25,8 +25,7 @@ public class AddAccountPageObject extends AbstractPages {
 
 	public void inputDeposit(int depositValue) {
 		waitToElementVisible(driver, AddAccountPageUI.INITIAL_DEPOSIT_TXT);
-		senkeyToElement(driver, AddAccountPageUI.INITIAL_DEPOSIT_TXT, depositValue);
-
+		sendkeyToElementConvertToString(driver, AddAccountPageUI.INITIAL_DEPOSIT_TXT, depositValue);
 	}
 
 	public void clickSubmitButton() {
