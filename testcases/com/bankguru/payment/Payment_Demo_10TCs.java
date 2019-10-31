@@ -44,7 +44,7 @@ public class Payment_Demo_10TCs extends AbstractPages {
 	String customerID_1, customerName, dateOfBirth, address, city, state, pin, mobile, customerEmail, pass;
 	String customerID_2, addressEdit, cityEdit, stateEdit, pinEdit;
 	String accountID;
-	int deposit, amount;
+	int depositBefore, amountDeposit, depositAfter, amountWithdrawl;
 
 	private LoginPageObject loginPage;
 	private HomePageObject homePage;
@@ -93,8 +93,9 @@ public class Payment_Demo_10TCs extends AbstractPages {
 		stateEdit = "Colorado";
 		pinEdit = "235647";
 
-		deposit = 50000;
-		amount = 5000;
+		depositBefore = 50000;
+		amountDeposit = 5000;
+		amountWithdrawl = 40000;
 
 		email = "auto_test_" + randomEmail() + "@gmail.com";
 		openAnyURL(driver, "http://demo.guru99.com/V4/index.php");
@@ -179,11 +180,11 @@ public class Payment_Demo_10TCs extends AbstractPages {
 		addAccountPage = PageGeneratorManagerForPayment.getAddAccountPage(driver);
 		addAccountPage.inputCustomerID(customerID_1);
 		addAccountPage.selectAccountType("Savings");
-		addAccountPage.inputDeposit(deposit);
+		addAccountPage.inputDeposit(depositBefore);
 		addAccountPage.clickSubmitButton();
 		accountCreatedPage = PageGeneratorManagerForPayment.getAccCreateMsgPage(driver);
 		Assert.assertTrue(accountCreatedPage.isDisplayedMsgSuccess());
-		Assert.assertEquals(accountCreatedPage.getTextDeposit(), deposit);
+		Assert.assertEquals(accountCreatedPage.getTextDeposit(), depositBefore);
 		accountID = accountCreatedPage.getAccountIDNO();
 
 	}
@@ -208,9 +209,31 @@ public class Payment_Demo_10TCs extends AbstractPages {
 		accountUpdatedPage.OpenPageByDynamicLocator(driver, "Deposit");
 		depositInputPage = PageGeneratorManagerForPayment.getDepositInputPage(driver);
 		depositInputPage.inputAccountNo(accountID);
-		depositInputPage.inputAmountValue(amount);
+		depositInputPage.inputAmountValue(amountDeposit);
 		depositInputPage.inputDescription("deposit");
 		depositInputPage.clickToSubmitBtn();
+		depositPage = PageGeneratorManagerForPayment.getDepositPage(driver);
+		Assert.assertTrue(depositPage.isDisplayedMsgSuccess());
+		Assert.assertEquals(depositPage.getCurrentAmount(), String.valueOf(depositBefore + amountDeposit));
+		depositAfter = depositBefore + amountDeposit;
+
+	}
+
+	@Test
+	public void TC_07_Withdrawl() {
+		depositPage.OpenPageByDynamicLocator(driver, "Withdrawal");
+		withdrawalInputPage = PageGeneratorManagerForPayment.getWithdrawInputPage(driver);
+		withdrawalInputPage.inputAccountNo(accountID);
+		withdrawalInputPage.inputAmount(amountWithdrawl);
+		withdrawalInputPage.inputDescription("Withdrawl");
+		withdrawalInputPage.clickSubmitBtn();
+		withdrawalPage = PageGeneratorManagerForPayment.getWithdrawPage(driver);
+		Assert.assertTrue(withdrawalPage.isDisplayedMsgSuccess());
+		Assert.assertEquals(withdrawalPage.getCurrentAmount(), String.valueOf(depositAfter - amountWithdrawl));
+	}
+
+	@Test
+	public void TC_08_Transfer() {
 
 	}
 
