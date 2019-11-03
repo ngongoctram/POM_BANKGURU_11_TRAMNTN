@@ -41,10 +41,10 @@ public class Payment_Demo_10TCs extends AbstractPages {
 	WebDriver driver;
 	WebDriverWait explixitwait;
 	String email, loginPageURL, userID, password;
-	String customerID_1, customerName, dateOfBirth, address, city, state, pin, mobile, customerEmail, pass;
-	String customerID_2, addressEdit, cityEdit, stateEdit, pinEdit;
-	String accountID;
-	int depositBefore, amountDeposit, depositAfter, amountWithdrawl;
+	String customerID, customerName, dateOfBirth, address, city, state, pin, mobile, customerEmail, pass;
+	String addressEdit, cityEdit, stateEdit, pinEdit;
+	String accountID_1, accountID_2;
+	int depositBefore, amountDeposit, depositAfter, amountWithdrawl, amountTranfer;
 
 	private LoginPageObject loginPage;
 	private HomePageObject homePage;
@@ -96,6 +96,7 @@ public class Payment_Demo_10TCs extends AbstractPages {
 		depositBefore = 50000;
 		amountDeposit = 5000;
 		amountWithdrawl = 40000;
+		amountTranfer = 2000;
 
 		email = "auto_test_" + randomEmail() + "@gmail.com";
 		openAnyURL(driver, "http://demo.guru99.com/V4/index.php");
@@ -128,21 +129,22 @@ public class Payment_Demo_10TCs extends AbstractPages {
 	}
 
 	@Test
-	public void TC_03_AddNewCustomer_1() {
+	public void TC_03_AddNewCustomer() {
 		homePage.OpenPageByDynamicLocator(driver, "New Customer");
 		addCustomerPage = PageGeneratorManagerForPayment.getAddCustomerPage(driver);
-		addCustomerPage.inputCustomerName(customerName);
-		addCustomerPage.inputDateOfBirth(dateOfBirth);
-		addCustomerPage.inputAddress(address);
-		addCustomerPage.inputCity(city);
-		addCustomerPage.inputState(state);
-		addCustomerPage.inputPIN(pin);
-		addCustomerPage.inputMobileNumber(mobile);
-		addCustomerPage.inputEmail(customerEmail);
+		addCustomerPage.inputToDynamicTextbox(driver, customerName, "name");
+		addCustomerPage.inputToDynamicTextbox(driver, dateOfBirth, "dob");
+		addCustomerPage.inputToDynamicTextArea(driver, address, "addr");
+		addCustomerPage.inputToDynamicTextbox(driver, city, "city");
+		addCustomerPage.inputToDynamicTextbox(driver, state, "state");
+		addCustomerPage.inputToDynamicTextbox(driver, pin, "pinno");
+		addCustomerPage.inputToDynamicTextbox(driver, mobile, "telephoneno");
+		addCustomerPage.inputToDynamicTextbox(driver, customerEmail, "emailid");
 		addCustomerPage.inputPassword(pass);
+		addCustomerPage.inputToDynamicTextbox(driver, pass, "password");
 		addCustomerPage.clickToSubmitButton();
 		customerCreatedPage = PageGeneratorManagerForPayment.getCustomerRegMsgPage(driver);
-		customerID_1 = customerCreatedPage.getCustomerID();
+		customerID = customerCreatedPage.getCustomerID();
 		Assert.assertTrue(customerCreatedPage.isDisplayedMsgCreateCustomer());
 		Assert.assertEquals(customerCreatedPage.getTextCustomerName(), customerName);
 		Assert.assertEquals(customerCreatedPage.getTextDateOfBirth(), dateOfBirth);
@@ -159,7 +161,7 @@ public class Payment_Demo_10TCs extends AbstractPages {
 	public void TC_04_EditCustomer_1() {
 		customerCreatedPage.OpenPageByDynamicLocator(driver, "Edit Customer");
 		editCustomerPage = PageGeneratorManagerForPayment.getEditCustomerInputPage(driver);
-		editCustomerPage.inputCustomerID(customerID_1);
+		editCustomerPage.inputCustomerID(customerID);
 		editCustomerPage.clickToSubmitButton();
 
 		customerEditedPage = PageGeneratorManagerForPayment.getEditCustomerPage(driver);
@@ -175,25 +177,38 @@ public class Payment_Demo_10TCs extends AbstractPages {
 	}
 
 	@Test
-	public void TC_05_AddNewAccount() {
+	public void TC_05_AddNewAccount_1() {
 		customerUpdatedPage.OpenPageByDynamicLocator(driver, "New Account");
 		addAccountPage = PageGeneratorManagerForPayment.getAddAccountPage(driver);
-		addAccountPage.inputCustomerID(customerID_1);
+		addAccountPage.inputCustomerID(customerID);
 		addAccountPage.selectAccountType("Savings");
 		addAccountPage.inputDeposit(depositBefore);
 		addAccountPage.clickSubmitButton();
 		accountCreatedPage = PageGeneratorManagerForPayment.getAccCreateMsgPage(driver);
 		Assert.assertTrue(accountCreatedPage.isDisplayedMsgSuccess());
-		Assert.assertEquals(accountCreatedPage.getTextDeposit(), depositBefore);
-		accountID = accountCreatedPage.getAccountIDNO();
-
+		Assert.assertEquals(accountCreatedPage.getTextDeposit(), String.valueOf(depositBefore));
+		accountID_1 = accountCreatedPage.getAccountIDNO();
 	}
 
 	@Test
-	public void TC_06_EditAccount() {
+	public void TC_06_AddNewAccount_2() {
+		accountCreatedPage.OpenPageByDynamicLocator(driver, "New Account");
+		addAccountPage = PageGeneratorManagerForPayment.getAddAccountPage(driver);
+		addAccountPage.inputCustomerID(customerID);
+		addAccountPage.selectAccountType("Savings");
+		addAccountPage.inputDeposit(30000);
+		addAccountPage.clickSubmitButton();
+		accountCreatedPage = PageGeneratorManagerForPayment.getAccCreateMsgPage(driver);
+		Assert.assertTrue(accountCreatedPage.isDisplayedMsgSuccess());
+		Assert.assertEquals(accountCreatedPage.getTextDeposit(), String.valueOf(30000));
+		accountID_2 = accountCreatedPage.getAccountIDNO();
+	}
+
+	@Test
+	public void TC_07_EditAccount() {
 		accountCreatedPage.OpenPageByDynamicLocator(driver, "Edit Account");
 		editAccountPage = PageGeneratorManagerForPayment.getEditAccountInputPage(driver);
-		editAccountPage.inputToAccountNo(accountID);
+		editAccountPage.inputToAccountNo(accountID_1);
 		editAccountPage.clickToSubmitButton();
 		accountEditedPage = PageGeneratorManagerForPayment.getEditAccountPage(driver);
 		accountEditedPage.EditAccountType("Current");
@@ -205,10 +220,10 @@ public class Payment_Demo_10TCs extends AbstractPages {
 	}
 
 	@Test
-	public void TC_06_Deposit() {
+	public void TC_08_Deposit() {
 		accountUpdatedPage.OpenPageByDynamicLocator(driver, "Deposit");
 		depositInputPage = PageGeneratorManagerForPayment.getDepositInputPage(driver);
-		depositInputPage.inputAccountNo(accountID);
+		depositInputPage.inputAccountNo(accountID_1);
 		depositInputPage.inputAmountValue(amountDeposit);
 		depositInputPage.inputDescription("deposit");
 		depositInputPage.clickToSubmitBtn();
@@ -220,10 +235,10 @@ public class Payment_Demo_10TCs extends AbstractPages {
 	}
 
 	@Test
-	public void TC_07_Withdrawl() {
+	public void TC_09_Withdrawl() {
 		depositPage.OpenPageByDynamicLocator(driver, "Withdrawal");
 		withdrawalInputPage = PageGeneratorManagerForPayment.getWithdrawInputPage(driver);
-		withdrawalInputPage.inputAccountNo(accountID);
+		withdrawalInputPage.inputAccountNo(accountID_1);
 		withdrawalInputPage.inputAmount(amountWithdrawl);
 		withdrawalInputPage.inputDescription("Withdrawl");
 		withdrawalInputPage.clickSubmitBtn();
@@ -233,7 +248,28 @@ public class Payment_Demo_10TCs extends AbstractPages {
 	}
 
 	@Test
-	public void TC_08_Transfer() {
+	public void TC_10_Transfer() {
+		accountCreatedPage.OpenPageByDynamicLocator(driver, "Fund Transfer");
+		transInputPage = PageGeneratorManagerForPayment.getFundTransInputPage(driver);
+		transInputPage.inputToDynamicTextbox(driver, accountID_1, "payersaccount");
+		transInputPage.inputToDynamicTextbox(driver, accountID_2, "payeeaccount");
+		transInputPage.inputToDynamicTextbox(driver, amountTranfer, "ammount");
+		transInputPage.inputToDynamicTextbox(driver, "fund transfer", "desc");
+		transInputPage.clickToDynamicButton(driver, "AccSubmit");
+		transPage = PageGeneratorManagerForPayment.getFunTransPage(driver);
+		Assert.assertTrue(transPage.isDisplayedMsgDynamic(driver, "Fund Transfer Details"));
+		Assert.assertEquals(transPage.getDynamicTextInTable(driver, "Amount"), String.valueOf(amountTranfer));
+	}
+
+	@Test
+	public void TC_11_Balance() {
+		transPage.OpenPageByDynamicLocator(driver, "Balance Enquiry");
+		balanceInputPage = PageGeneratorManagerForPayment.getBalanceEnqInputPage(driver);
+		balanceInputPage.inputToDynamicTextbox(driver, accountID_1, "accountno");
+		balanceInputPage.clickToDynamicButton(driver, "AccSubmit");
+		balancePage = PageGeneratorManagerForPayment.getBalEnquiryPage(driver);
+		Assert.assertTrue(balancePage.isDisplayedMsgDynamic(driver, "Balance Details for Account " + accountID_1));
+		Assert.assertEquals(balancePage.getDynamicTextInTable(driver, "Balance"), String.valueOf(depositAfter - amountWithdrawl - amountTranfer));
 
 	}
 

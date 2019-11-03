@@ -83,16 +83,24 @@ public class AbstractPages {
 		element.sendKeys(value);
 	}
 
-//	public void sendKeysINTByJS(WebDriver driver, String locator, int attributeValue){
-//	    JavascriptExecutor js = ((JavascriptExecutor) driver);
-//	    boolean netQtty=false;
-//	    js.executeScript("arguments[0].setAttribute('value','"+attributeValue+"');", netQtty);
-//	}
-
 	public void sendkeyToElementConvertToString(WebDriver driver, String locator, int value) {
 		element = driver.findElement(By.xpath(locator));
 		element.clear();
 		element.sendKeys(String.valueOf(value));
+	}
+
+	public void sendkeyDynamicToElementConvertToString(WebDriver driver, String locator, int sendkeyValue, String... values) {
+		locator = String.format(locator, (Object[]) values);
+		element = driver.findElement(By.xpath(locator));
+		element.clear();
+		element.sendKeys(String.valueOf(sendkeyValue));
+	}
+
+	public void sendkeyDynamicToElement(WebDriver driver, String locator, String sendkeyValue, String... values) {
+		locator = String.format(locator, (Object[]) values);
+		element = driver.findElement(By.xpath(locator));
+		element.clear();
+		element.sendKeys(sendkeyValue);
 	}
 
 	public void selectItemInDropdown(WebDriver driver, String locator, String valueItem) {
@@ -135,12 +143,33 @@ public class AbstractPages {
 		return element.getText();
 	}
 
+	public String getDynamicText(WebDriver driver, String locator, String... values) {
+		locator = String.format(locator, (Object[]) values);
+		element = driver.findElement(By.xpath(locator));
+		return element.getText();
+	}
+
 	public int countNumberOfElement(WebDriver driver, String locator) {
 		elements = driver.findElements(By.xpath(locator));
 		return elements.size();
 	}
 
 	public boolean isElementDisplayed(WebDriver driver, String locator) {
+		setOverideTimeout(driver, Constrants.SHORT_TIMEOUT);
+		try {
+			WebElement element = driver.findElement(By.xpath(locator));
+			setOverideTimeout(driver, Constrants.LONG_TIMEOUT);
+			boolean status = element.isDisplayed();
+			return status;
+		} catch (Exception ex) {
+			setOverideTimeout(driver, Constrants.LONG_TIMEOUT);
+			System.out.println(ex.getMessage());
+			return false;
+		}
+	}
+
+	public boolean isDynamicElementDisplayed(WebDriver driver, String locator, String... values) {
+		locator = String.format(locator, (Object[]) values);
 		setOverideTimeout(driver, Constrants.SHORT_TIMEOUT);
 		try {
 			WebElement element = driver.findElement(By.xpath(locator));
@@ -378,6 +407,36 @@ public class AbstractPages {
 	public void OpenPageByDynamicLocator(WebDriver driver, String pageName) {
 		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_PAGE_XPATH, pageName);
 		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_PAGE_XPATH, pageName);
+	}
+
+	public void inputToDynamicTextbox(WebDriver driver, String sendkeyValue, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_TEXTBOX, nameAtributeValue);
+		sendkeyDynamicToElement(driver, AbstractPageUI.DYNAMIC_TEXTBOX, sendkeyValue, nameAtributeValue);
+	}
+
+	public void inputToDynamicTextArea(WebDriver driver, String sendkeyValue, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_TEXTAREA, nameAtributeValue);
+		sendkeyDynamicToElement(driver, AbstractPageUI.DYNAMIC_TEXTAREA, sendkeyValue, nameAtributeValue);
+	}
+
+	public void inputToDynamicTextbox(WebDriver driver, int sendkeyValue, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_TEXTBOX, nameAtributeValue);
+		sendkeyDynamicToElementConvertToString(driver, AbstractPageUI.DYNAMIC_TEXTBOX, sendkeyValue, nameAtributeValue);
+	}
+
+	public void clickToDynamicButton(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_BUTTON, nameAtributeValue);
+		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_BUTTON, nameAtributeValue);
+	}
+
+	public boolean isDisplayedMsgDynamic(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_PAGE_HEADING, nameAtributeValue);
+		return isDynamicElementDisplayed(driver, AbstractPageUI.DYNAMIC_PAGE_HEADING, nameAtributeValue);
+	}
+
+	public String getDynamicTextInTable(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_TABLE_ROW_NAME, nameAtributeValue);
+		return getDynamicText(driver, AbstractPageUI.DYNAMIC_TABLE_ROW_NAME, nameAtributeValue);
 	}
 
 	By by;
