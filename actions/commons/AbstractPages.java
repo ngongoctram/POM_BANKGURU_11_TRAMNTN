@@ -342,7 +342,7 @@ public class AbstractPages {
 	}
 
 	public void waitToElementInvisible(WebDriver driver, String locator) {
-		waitExplicit = new WebDriverWait(driver, Constrants.SHORT_TIMEOUT);
+		waitExplicit = new WebDriverWait(driver, shortTimeOut);
 		try {
 			by = By.xpath(locator);
 			waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(by));
@@ -429,14 +429,90 @@ public class AbstractPages {
 		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_BUTTON, nameAtributeValue);
 	}
 
+	public void clickToDynamicButton2(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_BUTTON2, nameAtributeValue);
+		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_BUTTON2, nameAtributeValue);
+	}
+
+	public void clickToDynamicMenu(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_MENU, nameAtributeValue);
+		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_MENU, nameAtributeValue);
+	}
+
+	public void clickToDynamicTitle(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_TITLE, nameAtributeValue);
+		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_TITLE, nameAtributeValue);
+	}
+
+	public void clickToDynamicLink(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_LINK, nameAtributeValue);
+		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_LINK, nameAtributeValue);
+	}
+
+	public void clickToDynamicImage(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_IMAGE, nameAtributeValue);
+		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_IMAGE, nameAtributeValue);
+	}
+
+	public void clickToDynamicCompare(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_ADD_TO_COMPARE, nameAtributeValue);
+		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_ADD_TO_COMPARE, nameAtributeValue);
+	}
+
+	public void clickToDynamicAddWishlist(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_ADD_TO_WISHLIST, nameAtributeValue);
+		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_ADD_TO_WISHLIST, nameAtributeValue);
+	}
+
+	public void clickToDynamicDetailProductTV(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_DETAIL_TV, nameAtributeValue);
+		clickToElementForDynamicLocator(driver, AbstractPageUI.DYNAMIC_DETAIL_TV, nameAtributeValue);
+	}
+
 	public boolean isDisplayedMsgDynamic(WebDriver driver, String nameAtributeValue) {
 		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_PAGE_HEADING, nameAtributeValue);
 		return isDynamicElementDisplayed(driver, AbstractPageUI.DYNAMIC_PAGE_HEADING, nameAtributeValue);
 	}
 
+	public boolean isDisplayedMsgDynamicSuccess(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_MSG, nameAtributeValue);
+		return isDynamicElementDisplayed(driver, AbstractPageUI.DYNAMIC_MSG, nameAtributeValue);
+	}
+
 	public String getDynamicTextInTable(WebDriver driver, String nameAtributeValue) {
 		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_TABLE_ROW_NAME, nameAtributeValue);
 		return getDynamicText(driver, AbstractPageUI.DYNAMIC_TABLE_ROW_NAME, nameAtributeValue);
+	}
+
+	public String getDynamicTextInTextbox(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_TEXTBOX, nameAtributeValue);
+		return getDynamicText(driver, AbstractPageUI.DYNAMIC_TEXTBOX, nameAtributeValue);
+	}
+
+	public String getDynamicMsgWarning(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_WARNING_MSG, nameAtributeValue);
+		return getDynamicText(driver, AbstractPageUI.DYNAMIC_WARNING_MSG, nameAtributeValue);
+	}
+
+	public String getDynamicPriceInMyCart(WebDriver driver, String nameAtributeValue) {
+		waitToElementVisibleForDynamicLocator(driver, AbstractPageUI.DYNAMIC_PRICE_IN_CART, nameAtributeValue);
+		return getDynamicText(driver, AbstractPageUI.DYNAMIC_PRICE_IN_CART, nameAtributeValue);
+	}
+
+	public void searchResult(WebDriver driver, String locator, String nameLocator, String priceLocator, int search1, int search2) {
+		List<WebElement> allProducts = driver.findElements(By.xpath(locator));
+		for (WebElement productInfor : allProducts) {
+			if (productInfor.isDisplayed()) {
+				System.out.println("-----Search result:-----");
+				System.out.println("Product name: " + getText(driver, nameLocator));
+				String price = getText(driver, priceLocator).replace("$", "").trim();
+				if (Integer.parseInt(price) > search1 && Float.parseFloat(price) < search2) {
+					System.out.println("Price of product: " + getText(driver, priceLocator));
+					break;
+				}
+			}
+
+		}
 	}
 
 	By by;

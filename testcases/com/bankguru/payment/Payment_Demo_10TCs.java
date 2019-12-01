@@ -186,6 +186,8 @@ public class Payment_Demo_10TCs extends AbstractTest {
 		addAccountPage.clickSubmitButton();
 		accountCreatedPage = PageGeneratorManagerForPayment.getAccCreateMsgPage(driver);
 		Assert.assertTrue(accountCreatedPage.isDisplayedMsgSuccess());
+		Assert.assertEquals(accountCreatedPage.getDynamicTextInTable(driver, "Account Type"), "Savings");
+		Assert.assertEquals(accountCreatedPage.getDynamicTextInTable(driver, "Date of Opening"), getToday());
 		Assert.assertEquals(accountCreatedPage.getTextDeposit(), String.valueOf(depositBeforeAc1));
 		accountID_1 = accountCreatedPage.getAccountIDNO();
 	}

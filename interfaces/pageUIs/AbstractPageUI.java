@@ -15,13 +15,24 @@ public class AbstractPageUI {
 	public static final String BALANCE_ENQUIRY = "//a[text()='Balance Enquiry']";
 	public static final String MINI_STATEMENT_LINK = "//a[text()='Mini Statement']";
 	public static final String CUSTOMISED_STATEMENT_LINK = "//a[text()='Customised Statement']";
-	public static final String DYNAMIC_PAGE_XPATH = "//a[text()='%s']";
 
+	public static final String DYNAMIC_PAGE_XPATH = "//a[text()='%s']";
 	public static final String DYNAMIC_TEXTBOX = "//input[@name='%s']";
-	public static final String DYNAMIC_BUTTON = "//input[@name ='%s']";
+	public static final String DYNAMIC_BUTTON = "//button[@name ='%s']";
+	public static final String DYNAMIC_BUTTON2 = "//button[@title='%s']";
 	public static final String DYNAMIC_LINK = "//a[text()='%s']";
 	public static final String DYNAMIC_PAGE_HEADING = "//p[@class ='heading3' and text() ='%s']";
 	public static final String DYNAMIC_TEXTAREA = "//textarea[@name='%s']";
 	public static final String DYNAMIC_TABLE_ROW_NAME = "//td[text()='%s']/following-sibling::td";
+	public static final String DYNAMIC_MENU = "//span[text() ='%s']";
+	public static final String DYNAMIC_TITLE = "//a[@title='%s']";
+	public static final String DYNAMIC_IMAGE = "//img[@alt='%s']";
+
+	public static final String DYNAMIC_ADD_TO_COMPARE = "//a[@title='%s']//parent::h2//following-sibling::div[@class='actions']//ul//li[2]//a";
+	public static final String DYNAMIC_ADD_TO_WISHLIST = "//a[@title='%s']//parent::h2//following-sibling::div[@class='actions']//ul//a[text()='Add to Wishlist']";
+	public static final String DYNAMIC_DETAIL_TV = "//a[@title='%s']//img";
+	public static final String DYNAMIC_WARNING_MSG = "//label[@for ='%s']/following-sibling::div//div";
+	public static final String DYNAMIC_MSG = "//span[text()='%s']";
+	public static final String DYNAMIC_PRICE_IN_CART = "//h2[@class='product-name']/a[text()='%s']//ancestor::td//following-sibling::td[@class='product-cart-price']//span[@class='price']";
 
 }
